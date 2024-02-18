@@ -1,5 +1,6 @@
 import React from 'react';
-import Sidebar from './layout/Sidebar';
+import Sidebar from './layout/sidebar/Sidebar';
+import Followbar from './layout/followbar/Followbar';
 
 interface ILayoutProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ const Layout: React.FC<ILayoutProps> = ({ children }) => {
           <div className="col-span-3 lg:col-span-2 border-x-[1px] border-neutral-800">
             {children}
           </div>
+          <Followbar />
         </div>
       </div>
     </div>
