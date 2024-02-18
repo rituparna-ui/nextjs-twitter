@@ -25,6 +25,14 @@ const SignupModal = () => {
     }
   }, [signupModal]);
 
+  const onToggle = useCallback(() => {
+    if (isLoading) {
+      return;
+    }
+    signupModal.onClose();
+    loginModal.onOpen();
+  }, [isLoading, signupModal, loginModal]);
+
   const bodyContent = (
     <div className="flex flex-col gap-4">
       <Input
@@ -54,6 +62,26 @@ const SignupModal = () => {
     </div>
   );
 
+  const footerContent = (
+    <div
+      className="
+      text-neutral-400
+      text-center
+      mt-4
+    "
+    >
+      <p>
+        Already have an account ?{' '}
+        <span
+          className="text-white cursor-pointer hover:underline"
+          onClick={onToggle}
+        >
+          Sign In
+        </span>
+      </p>
+    </div>
+  );
+
   return (
     <Modal
       disabled={isLoading}
@@ -63,6 +91,7 @@ const SignupModal = () => {
       onClose={signupModal.onClose}
       onSubmit={onSubmit}
       body={bodyContent}
+      footer={footerContent}
     />
   );
 };

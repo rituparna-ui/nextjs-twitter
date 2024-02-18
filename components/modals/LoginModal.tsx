@@ -2,9 +2,11 @@ import useLoginModal from '@/hooks/useLoginModal';
 import React, { useCallback, useState } from 'react';
 import Input from '../Input';
 import Modal from '../Modal';
+import useSignupModal from '@/hooks/useSignupModal';
 
 const LoginModal = () => {
   const loginModal = useLoginModal();
+  const signupModal = useSignupModal();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,6 +22,14 @@ const LoginModal = () => {
       setIsLoading(false);
     }
   }, [loginModal]);
+
+  const onToggle = useCallback(() => {
+    if (isLoading) {
+      return;
+    }
+    loginModal.onClose();
+    signupModal.onOpen();
+  }, [isLoading, signupModal, loginModal]);
 
   const bodyContent = (
     <div className="flex flex-col gap-4">
@@ -38,6 +48,26 @@ const LoginModal = () => {
     </div>
   );
 
+  const footerContent = (
+    <div
+      className="
+      text-neutral-400
+      text-center
+      mt-4
+    "
+    >
+      <p>
+        Don't have an account ?{' '}
+        <span
+          className="text-white cursor-pointer hover:underline"
+          onClick={onToggle}
+        >
+          Sign Up
+        </span>
+      </p>
+    </div>
+  );
+
   return (
     <Modal
       disabled={isLoading}
@@ -47,6 +77,7 @@ const LoginModal = () => {
       onClose={loginModal.onClose}
       onSubmit={onSubmit}
       body={bodyContent}
+      footer={footerContent}
     />
   );
 };
