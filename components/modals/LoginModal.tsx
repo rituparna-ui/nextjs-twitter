@@ -57,7 +57,7 @@ const LoginModal = () => {
     "
     >
       <p>
-        Don't have an account ?{' '}
+        Don&apos;t have an account ?{' '}
         <span
           className="text-white cursor-pointer hover:underline"
           onClick={onToggle}
